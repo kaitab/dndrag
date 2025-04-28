@@ -1,0 +1,6 @@
+langchain==0.3.24
+langchain_chroma==0.2.3
+langchain_community==0.3.22
+langchain_core==0.3.56
+langchain_huggingface==0.1.2
+langgraph==0.3.34
