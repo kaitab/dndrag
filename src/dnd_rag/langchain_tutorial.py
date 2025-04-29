@@ -1,5 +1,6 @@
 from langchain_community.utilities import SQLDatabase
-from langchain_community.agent_toolkits import SQLDatabaseToolkit
+from langchain_community.agent_toolkits import SQLDatabaseToolkit, load_tools
+from langchain.agents import AgentType, initialize_agent
 from langchain.chat_models import init_chat_model
 from langchain import hub
 import os
@@ -23,21 +24,74 @@ class RAG():
         # TODO change the database
         db = SQLDatabase.from_uri("sqlite:///Chinook.db")
 
-        toolkit = SQLDatabaseToolkit(db=db, llm=llm)
-        tools = toolkit.get_tools()
+        # toolkit = SQLDatabaseToolkit(db=db, llm=llm)
+        # tools = toolkit.get_tools()
+        tools = load_tools.load_tools(
+            ["graphql"],
+            graphql_endpoint="https://www.dnd5eapi.co/graphql/2014"
+        )
 
         # prompt
         prompt_template = hub.pull("langchain-ai/sql-agent-system-prompt")
 
         # prompt_template.messages[0].pretty_print()
-        system_message = prompt_template.format(dialect="SQLite", top_k=5)
+        # system_message = prompt_template.format(dialect="SQLite", top_k=5)
+        system_message = """
+        You are a parser that understands the meaning of natural language queries 
+        and parses them into valid graphql queries based on this schema:
+
+        query {
+            abilityScores {
+                index
+                name
+                full_name
+                desc
+                skills: [Skill!]!
+            }
+
+            alignments {
+                index 
+                name
+                abbreviation
+                desc
+            }
+
+            backgrounds {
+                index
+                name
+                bonds
+                feature
+                flaws
+                ideals
+                langauge_options
+                personality_traits
+                starting_equipment
+                starting_equipment_options
+                starting_proficiencies: [Proficiency!]!
+            }
+
+            conditions {
+                index
+                name
+                desc
+            }
+
+            skills {
+                index
+                name
+                desc
+                ability_score: AbilityScore!
+            }
+        }
+        """
 
         # agent 
         agent_executor = create_react_agent(llm, tools, prompt=system_message)
 
         # TODO: need to update this with the entity types in our database
-
-        entities = get_entities(db, ["SELECT Name FROM artists", "SELECT Title FROM albums"])
+        
+        # entities = get_entities(db, ["query{\n abilityScores{ \n name \n full_name \n desc \n}\n}"])
+        entities = "query{\n abilityScores{ index \n \n name \n full_name \n desc \n}\n}"
 
         suffix = (
             "If you need to filter on a proper noun like a Name, you must ALWAYS first look up "
@@ -49,19 +103,20 @@ class RAG():
 
         retriever_tool = make_retriever(entities)
 
-        print(retriever_tool.invoke("Alice Chains"))
+        # print(retriever_tool.invoke("Alice Chains"))
 
         tools.append(retriever_tool)
 
 
         # build the agent
         self.agent = create_react_agent(llm, tools, prompt=system)
+        # self.agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
 
     def query(self, question: str) -> list[str]:
         messages = []
         for step in self.agent.stream(
-            {"messages": [{"role": "user", "content": question}]},
-            stream_mode="values",
+            input={"messages": [{"role": "user", "content": question}]},
+            stream_mode="values"
         ):
             messages.append(step["messages"][-1])
         return messages
@@ -69,7 +124,7 @@ class RAG():
 
 # example user question
 
-question = "How many albums does alis in chains have?"
+question = "What are the names of the skills needed for the wis abilityScore?"
 
 rag = RAG()
 output = rag.query(question)
