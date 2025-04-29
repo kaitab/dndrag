@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D&D Q&A Bot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to the DND Q&A Bot!</h1>
+    <h2>Ask any question you would look up in your sourcebook and be amazed!</h2>
+    <form method=get>
+        <input type=text name=user_query placeholder="Search"/>
+        <input type="submit" value="Make a history check"/>
+    </form>
+    <p>{{query_response}}</p>
+</body>
+</html>
