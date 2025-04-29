@@ -1,0 +1,22 @@
+body{
+    font-family: Times New Roman;
+    font-size: 2vw;
+    margin: 30px;
+    padding: 30 px;
+}
+
+h1 {
+    font-family: Times New Roman;
+    font-size: 4vw;
+}
+
+input[type="text"] {
+    font-family: Times New Roman;
+    font-size: 2vw;
+}
+
+
+input[type="submit"] {
+    font-family: Times New Roman;
+    font-size: 2vw;
+}
