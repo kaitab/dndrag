@@ -123,7 +123,7 @@ class RAG():
 
 
 # example user question
-
+question = input("Enter question: ")
 question = "What are the names of the skills needed for the wis abilityScore?"
 
 rag = RAG()
