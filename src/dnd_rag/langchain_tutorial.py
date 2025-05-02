@@ -5,7 +5,6 @@ from langchain.chat_models import init_chat_model
 from langchain import hub
 import os
 import getpass
-from entity_collector import get_entities
 from entity_retriever import make_retriever
 
 
@@ -91,7 +90,7 @@ class RAG():
         # TODO: need to update this with the entity types in our database
         
         # entities = get_entities(db, ["query{\n abilityScores{ \n name \n full_name \n desc \n}\n}"])
-        entities = "query{\n abilityScores{ index \n \n name \n full_name \n desc \n}\n}"
+        
 
         suffix = (
             "If you need to filter on a proper noun like a Name, you must ALWAYS first look up "
@@ -101,7 +100,7 @@ class RAG():
 
         system = f"{system_message}\n\n{suffix}"
 
-        retriever_tool = make_retriever(entities)
+        retriever_tool = make_retriever(db)
 
         # print(retriever_tool.invoke("Alice Chains"))
 
@@ -122,10 +121,10 @@ class RAG():
         return messages
 
 
-# example user question
-question = input("Enter question: ")
+# # example user question
+
 question = "What are the names of the skills needed for the wis abilityScore?"
 
-rag = RAG()
-output = rag.query(question)
-print(output)
+# rag = RAG()
+# output = rag.query(question)
+# print(output)
