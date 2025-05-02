@@ -10,7 +10,8 @@ def make_retriever(db):
     chroma_directory = "./chroma_langchain_db"
 
     if not path.isdir(chroma_directory):
-        entities = get_entities(db, ["SELECT Name FROM artists", "SELECT Title FROM albums"])
+        entities = "query{\n abilityScores{ index \n \n name \n full_name \n desc \n}\n}"
+        #entities = get_entities(db, ["SELECT Name FROM artists", "SELECT Title FROM albums"])
         _ = vector_store.add_texts(entities[0] + entities[1])
     
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")

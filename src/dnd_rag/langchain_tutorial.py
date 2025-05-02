@@ -90,7 +90,7 @@ class RAG():
         # TODO: need to update this with the entity types in our database
         
         # entities = get_entities(db, ["query{\n abilityScores{ \n name \n full_name \n desc \n}\n}"])
-        entities = "query{\n abilityScores{ index \n \n name \n full_name \n desc \n}\n}"
+        
 
         suffix = (
             "If you need to filter on a proper noun like a Name, you must ALWAYS first look up "
