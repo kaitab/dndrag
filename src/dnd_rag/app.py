@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from langchain_tutorial import RAG
+from dndRag import RAG
 
 
 app = Flask(__name__)
@@ -18,11 +18,16 @@ def main_page():
     if request.method == "GET":
         return render_template("mainpage.html", response="An answer will appear here with the roll of a die...")
     if request.method == "POST":
-        query = request.form.get('user_query')
-        rag_query = rag.query(query)
-        ai_message = rag_query[-1]
-        response = ai_message.content
-        return render_template("mainpage.html", response=response)
+        try:
+            query = request.form.get('user_query')
+            rag_query = rag.query(query)
+            ai_message = rag_query[-1]
+            response = ai_message.content
+            return render_template("mainpage.html", response=response)
+        except Exception as e:
+            print(e)
+            return render_template("mainpage.html", response="Looks like we rolled a Nat 1! Something went wrong on our end, so please try again")
+        
 
 if __name__ == '__main__':
     # make_rag() # method 1, still runs initilization twice this way
