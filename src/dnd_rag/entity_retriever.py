@@ -19,7 +19,6 @@ def make_retriever(db):
                 data = file.read()
             entities.append(data)
             metadata.append({'source': filename.replace(".json","")})
-        #entities = get_entities(db, ["SELECT Name FROM artists", "SELECT Title FROM albums"])
         
     
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")

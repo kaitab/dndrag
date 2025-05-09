@@ -1,6 +1,5 @@
 from . import db
 
-
 class Query(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
