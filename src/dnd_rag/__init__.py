@@ -39,7 +39,7 @@ def create_app():
                 response = ai_message.content
                 log_query(query, response)
 
-                return render_template("mainpage.html", response=response)
+                return render_template("mainpage.html", response=response,history=all_queries())
             except Exception as e:
                 print(e)
                 return render_template("mainpage.html", response="Looks like we rolled a Nat 1! Something went wrong on our end, so please try again")
