@@ -1,11 +1,11 @@
 import pytest
-from dnd_rag import create_app, db
+from app import create_app, db
 
 @pytest.fixture(scope='session')
 def app():
     """Session-wide test application."""
     # Create the app instance
-    app = create_app(testing=True)
+    app, rag = create_app(testing=True)
     # Establish an application context before running the tests.
     # This is needed for operations like db.create_all()
     context = app.app_context()

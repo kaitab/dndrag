@@ -7,7 +7,7 @@ db = SQLAlchemy()
 rag = None
 
 
-def create_app():
+def create_app(testing=False):
     app = Flask(__name__)
     # app.config.from_object()
 
@@ -16,7 +16,9 @@ def create_app():
     instance_sub_dir = path.join('instance', 'db.sqlite')
     filename =  f"sqlite:///{path.join(src_dir, instance_sub_dir)}"
     app.config['SQLALCHEMY_DATABASE_URI'] = filename
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    if testing:
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        app.config['TESTING'] = True
 
     from dnd_rag.dndRag import RAG
     from dnd_rag.query_history import log_query, all_queries
