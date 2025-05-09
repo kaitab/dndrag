@@ -1,5 +1,5 @@
-from dnd_rag.model import Query, db
 from datetime import datetime
+from app.model import Query, db
 
 def log_query(content: str, reply: str):
     new_query = Query(

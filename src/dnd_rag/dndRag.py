@@ -258,12 +258,3 @@ class RAG():
         ):
             messages.append(step["messages"][-1])
         return messages
-
-
-# # example user question
-
-question = "What are the names of the skills needed for the wis abilityScore?"
-
-# rag = RAG()
-# output = rag.query(question)
-# print(output)
