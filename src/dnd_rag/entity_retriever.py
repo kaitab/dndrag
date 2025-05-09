@@ -8,8 +8,9 @@ from .entity_collector import get_entities
 def make_retriever(db):
 
     chroma_directory = "./chroma_langchain_db"
-
-    if True:  # not path.isdir(chroma_directory):
+    add_texts = False
+    if not path.isdir(chroma_directory):
+        add_texts = True
         entities = []
         metadata = []
         json_dir = "./data/types_json"
@@ -29,7 +30,8 @@ def make_retriever(db):
         persist_directory=chroma_directory,  # Where to save data locally, remove if not necessary
     )
 
-    _ = vector_store.add_texts(entities, metadata=metadata)
+    if add_texts:
+        _ = vector_store.add_texts(entities, metadata=metadata)
 
     # retriever_tool gets the relevant entities for the query
 
