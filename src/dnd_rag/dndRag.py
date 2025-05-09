@@ -5,7 +5,7 @@ from langchain.chat_models import init_chat_model
 from langchain import hub
 import os
 import getpass
-from entity_retriever import make_retriever
+from .entity_retriever import make_retriever
 
 
 # Agent tools

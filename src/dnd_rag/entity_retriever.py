@@ -2,7 +2,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain.agents.agent_toolkits import create_retriever_tool
 from os import path, listdir
-from entity_collector import get_entities
+from .entity_collector import get_entities
 
 
 def make_retriever(db):
