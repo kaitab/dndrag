@@ -1,8 +1,7 @@
 from flask import Flask,  request, render_template
 from flask_sqlalchemy import SQLAlchemy
-from .dndRag import RAG
 from os import path
-from dnd_rag.query_history import log_query, all_queries
+
 
 db = SQLAlchemy()
 rag = None
@@ -12,10 +11,15 @@ def create_app():
     app = Flask(__name__)
     # app.config.from_object()
 
-    home_directory = path.abspath(path.dirname(__file__))
+    home_directory = (path.dirname(__file__))
+    src_dir = path.dirname(home_directory)
     instance_sub_dir = path.join('instance', 'db.sqlite')
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{path.join(home_directory, instance_sub_dir)}"
+    filename =  f"sqlite:///{path.join(src_dir, instance_sub_dir)}"
+    app.config['SQLALCHEMY_DATABASE_URI'] = filename
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    from dnd_rag.dndRag import RAG
+    from dnd_rag.query_history import log_query, all_queries
 
     db.init_app(app)
 
@@ -33,7 +37,7 @@ def create_app():
                 rag_query = rag.query(query)
                 ai_message = rag_query[-1]
                 response = ai_message.content
-                # log_query(rag_query, response)
+                log_query(query, response)
 
                 return render_template("mainpage.html", response=response)
             except Exception as e:
