@@ -1,0 +1,8 @@
+Metadata-Version: 2.2
+Name: dnd_rag
+Version: 0.1
+Summary: RAG tool for DnD SRD Data
+Requires-Dist: numpy
+Requires-Dist: pandas
+Dynamic: requires-dist
+Dynamic: summary
