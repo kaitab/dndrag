@@ -92,7 +92,7 @@ class RAG():
             "guess at the proper name - use this function to find similar ones."
         )
 
-        system = f"{system_message}\n\n{suffix}"
+        system = f"{system_message}"
 
         retriever_tool = make_retriever_txt(db)
 
