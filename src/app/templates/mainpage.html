@@ -14,8 +14,12 @@
         <input type="submit" value="Make a history check"/>
     </form>
     <p>{{response}}</p>
-
-    <button onclick="toggleVisibility()">Show Q/A History</button>
+    <div class="button-container">
+        <button id="show_hide_button" onclick="toggleVisibility()">Show Q/A History</button>
+        <form action="{{url_for('main.clear_history')}}", method="post">
+            <button type="submit">Clear History</button>
+        </form> 
+    </div>
     <ul id="q_history" class="hidden">
         {% for q in history %}
             <li>{{ q.content }}: {{ q.reply }} | {{ q.date}}</li> 
@@ -25,6 +29,15 @@
         function toggleVisibility() {
             var element = document.getElementById("q_history");
             element.classList.toggle("hidden");
+
+            var button = document.getElementById("show_hide_button")
+
+            if (element.classList.contains("hidden")) {
+                button.textContent = 'Show Q/A History'
+            }
+            else {
+                button.textContent = 'Hide Q/A History'
+            }
         }
     </script>
 </body>

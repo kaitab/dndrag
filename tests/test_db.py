@@ -1,7 +1,7 @@
 import pytest
 # from dnd_rag import db, rag
 from app.model import Query
-from dnd_rag.query_history import log_query, all_queries
+from dnd_rag.query_history import log_query, all_queries, clear_query_history
 
 
 def test_log_query_direct(session):
@@ -32,18 +32,48 @@ def test_log_query_direct(session):
 def test_log_query_via_post(client, session):
     """Tests that db is updated when a POST request is made"""
 
-    
     form_data = {
         "user_query": "What is the alignment of a Beholder?",
         "submit": "Make a history check"
     }
     response = client.post('/', data=form_data)
-    assert b"404" not in response.data  # TODO: this is failing now, could be a real issue with registering routes, may just be issue with sending properly formatted POST
+    assert b"404" not in response.data  
     
-    all_queries = session.query(Query).all()
+    queries_ist = session.query(Query).all()
 
-    assert all_queries is not None
+    assert queries_ist is not None
 
-    assert len(all_queries) == 1
+    assert len(queries_ist) == 1
 
 
+def test_clear_history(client, session):
+    """Tests that entries can be cleared from db"""
+
+    log_query("What type of damage does a young black dragon's breath weapon do?","A young black dragon's breath weapon deals acid damage")
+
+    logged_queries = session.query(Query).all()
+
+    # check first item is added
+
+    assert logged_queries is not None
+    assert len(logged_queries) == 1
+    assert len(logged_queries) == len(all_queries())
+
+    clear_query_history()
+    # check that it is now removed
+    logged_queries = session.query(Query).all()
+    assert len(logged_queries) == len(all_queries()) == 0
+
+
+def test_clear_history_post(client, session):
+    """Tests that entries can be cleared from db"""
+
+    log_query("What type of damage does a young black dragon's breath weapon do?","A young black dragon's breath weapon deals acid damage")
+
+    assert len(session.query(Query).all()) == 1
+    assert len(session.query(Query).all()) == len(all_queries())
+
+    response = client.post('/clear')
+
+    assert b"404" not in response.data 
+    assert len(session.query(Query).all()) == 0

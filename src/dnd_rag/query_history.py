@@ -16,3 +16,6 @@ def all_queries():
     data = [{'content': q.content, 'reply': q.reply, 'date': q.date} for q in queries]
     return data
 
+def clear_query_history():
+    Query.query.delete()
+    db.session.commit()

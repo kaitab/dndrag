@@ -1,8 +1,9 @@
 from . import rag
-from flask import request, render_template, Blueprint
-from dnd_rag.query_history import log_query, all_queries
+from flask import request, render_template, Blueprint, redirect, url_for
+from dnd_rag.query_history import log_query, all_queries, clear_query_history
 
 main_bp = Blueprint('main', __name__)
+
 
 @main_bp.route("/", methods=["GET", "POST"])
 def main_page():
@@ -21,3 +22,8 @@ def main_page():
         except Exception as e:
             print(e)
             return render_template("mainpage.html", response="Looks like we rolled a Nat 1! Something went wrong on our end, so please try again")
+
+@main_bp.route("/clear", methods=["POST"])
+def clear_history():
+    clear_query_history()
+    return redirect(url_for('main.main_page'))
