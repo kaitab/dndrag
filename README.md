@@ -2,7 +2,7 @@
 
 This repo contains the source code for our COSI 217 Final Project. We built a system that uses a modified langchain sytem for Retrieval Augmented Generation (RAG) that accesses the [5e srd api](https://5e-bits.github.io/docs/)
 
-The write-up for this project is available [here](https://docs.google.com/document/d/1yjx_pmMzjqeuZ7DQKZvf2xI7dy_k_q-Pjh43KIv4e-U/edit?usp=sharing)
+The write-up for this project is available [here](https://docs.google.com/document/d/1yjx_pmMzjqeuZ7DQKZvf2xI7dy_k_q-Pjh43KIv4e-U/edit?usp=sharing) to give highly accurate, quick answers to questions about the dense rules of 5th edition Dungeons and Dragons.
 
 <h2>Build/Run</h2>
 Since we use Google Gemini as the main react agent through LangChain, the app requires a Gemini API key, either as an environment variable named `GOOGLE_API_KEY` or entered through the console upon running the app.
