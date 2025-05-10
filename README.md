@@ -1,11 +1,13 @@
 # dndrag
 
-This repo contains the source code for our COSI 217 Final Project. We built a system that uses a modified langchain sytem for Retrieval Augmented Generation (RAG) that accesses the [5e srd api](https://5e-bits.github.io/docs/)
+This repo contains the source code for our COSI 217 Final Project. We built a system that uses a modified langchain sytem for Retrieval Augmented Generation (RAG) that accesses the [5e srd api](https://5e-bits.github.io/docs/) to give highly accurate, quick answers to questions about the dense rules of 5th edition Dungeons and Dragons.
 
-The write-up for this project is available [here](https://docs.google.com/document/d/1yjx_pmMzjqeuZ7DQKZvf2xI7dy_k_q-Pjh43KIv4e-U/edit?usp=sharing)
+The write-up for this project is available [here](https://docs.google.com/document/d/1yjx_pmMzjqeuZ7DQKZvf2xI7dy_k_q-Pjh43KIv4e-U/edit?usp=sharing) 
 
 <h2>Build/Run</h2>
-The code can be run py installing the python package from the project root directory (`pip install .`) and then running run.py, or it can be built/run as a docker image/ 
+Since we use Google Gemini as the main react agent through LangChain, the app requires a Gemini API key, either as an environment variable named `GOOGLE_API_KEY` or entered through the console upon running the app.
+
+The code can be run py installing the python package from the project root directory (`pip install .`) and then running `run.py` This is the recommended way, since it is easier to enter your own API token from the console, but it can also be built/run as a docker image
 
 To build the image, run: 
 
