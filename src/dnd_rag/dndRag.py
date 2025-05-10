@@ -5,12 +5,13 @@ from langchain.chat_models import init_chat_model
 from langchain import hub
 import os
 import getpass
-from .entity_retriever import make_retriever
+from .entity_retriever import make_retriever_txt
 
 
 # Agent tools
 from langchain_core.messages import HumanMessage
 from langgraph.prebuilt import create_react_agent
+from langgraph.graph import MessagesState, StateGraph
 
 
 class RAG():
@@ -37,189 +38,43 @@ class RAG():
         # system_message = prompt_template.format(dialect="SQLite", top_k=5)
         system_message = """
         You are a parser that understands the meaning of natural language queries 
-        and parses them into valid graphql queries based on this schema:
+        and parses them into valid graphql queries, constructing your query from 
+        any of the following Query object types:
+
+        type Query {
+            abilityScores
+            alignments
+            backgrounds
+            classes
+            conditions
+            damageTypes
+            equipmentCategories
+            equipments
+            feats
+            features
+            languages
+            levels
+            magicItems
+            magicSchools
+            monsters
+            proficiencies
+            races
+            skills
+            spells
+            subclasses
+            subraces
+            traits
+            weaponProperties
+        }
+
+        Before constructing your query, you MUST look through the graphql schemas for each of these objects, and 
+        the use the schema of the most relevant Query objects to build your valid graphql query. Do NOT skip
+        this step.
+
+        Your valid graphql query shold have the following schema:
 
         query {
-            abilityScores {
-                index
-                name
-                full_name
-                desc
-                skills: [Skill!]!
-            }
-
-            alignments {
-                index 
-                name
-                abbreviation
-                desc
-            }
-
-            backgrounds {
-                index
-                name
-                bonds
-                feature
-                flaws
-                ideals
-                langauge_options
-                personality_traits
-                starting_equipment
-                starting_equipment_options
-                starting_proficiencies: [Proficiency!]!
-            }
-
-            conditions {
-                index
-                name
-                desc
-            }
-
-            skills {
-                index
-                name
-                desc
-                ability_score: AbilityScore!
-            }
-
-            classes {
-                index
-                name
-                hit_die
-                proficiencies: [Proficiency!]!
-                saving_throws: [AbilityScore!]!
-                spellcasting: ClassSpellcasting
-                spells: [Spell!]!
-                starting_equipment: [Quantity!]!
-                class_levels: [Level!]!
-                sublcasses: [Subclass!]!
-                multi_classing: Multiclassing!
-                proficiency_choices: [ProficiencyChoice!]!
-                starting_equipment_options: [StartingEquipmentChoice!]!
-            }
-
-            conditions {
-                index
-                name
-                desc
-            }
-
-            damageTypes {
-                index
-                name
-                desc
-            }
-
-            equipments {
-                index
-                name
-                cost
-                desc
-                equipment_category: EquipmentCategory!
-                weight
-            }
-
-            equipmentCategrories {
-                index
-                name
-                equipment: [IEquipmentBase!]!
-            }
-
-            feats {
-                item
-                name
-                desc
-                prerequisites: [AbilityScorePrerequisite!]!
-            }
-
-            features {
-                index
-                name
-                desc
-                level
-                parent: Feature
-                class: Class!
-                subclass: Subclass
-                prerequisites: [FeatureScorePrerequisite!]!
-                reference
-                feature_specific: FeatureSpecific
-            }
-
-            languages {
-                index
-                name
-                desc
-                script
-                type: LanguageType!
-                typical_speakers
-            }
-
-            levels {
-                index
-                level
-                ability_score_bonus
-                class: Class!
-                sublcass: Subclass
-                features: [Features!]!
-                prof_bonus
-                spellcasting: LevelSpellCasting
-                class_specific: ClassSpecific
-                subclass_specific: SubclassSpecific
-            }
-
-            magicItems {
-                index
-                name
-                desc
-                rarity
-                equipment_category
-                image
-            }
-
-            magicSchools {
-                index
-                name
-                desc
-                spells: [Spell!]!
-            }
-
-            monsters {
-                index
-                name
-                alignment
-                desc
-                actions
-                challenge_rating
-                proficiency_bonus
-                charisma
-                condition_immunities: [Condition!]!
-                constitution
-                damage_immunities
-                constitution
-                damage_immunities
-                damage_resistances
-                damage_vulnerabilities
-                dexterity
-                forms: [Monster!]
-                hit_dice
-                hit_points
-                hit_points_roll
-                intelligence
-                languages
-                legendary_actions: [LegendaryAction!]
-                proficiencies: [MonsterProficiency!]!
-                reactions: [Reaction!]
-                senses
-                size
-                special_abilities [SpecialAbility!]
-                speed: MonsterSpeed!
-                strength
-                subtype
-                type: MonsterType!
-                wisdom
-                xp
-                image
-            }
+            {context}
         }
         """
 
@@ -239,7 +94,7 @@ class RAG():
 
         system = f"{system_message}\n\n{suffix}"
 
-        retriever_tool = make_retriever(db)
+        retriever_tool = make_retriever_txt(db)
 
         # print(retriever_tool.invoke("Alice Chains"))
 
@@ -257,4 +112,5 @@ class RAG():
             stream_mode="values"
         ):
             messages.append(step["messages"][-1])
+            step["messages"][-1].pretty_print()
         return messages

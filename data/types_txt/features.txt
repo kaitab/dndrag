@@ -1,0 +1,564 @@
+  features(level, class, subclass, order, skip, limit, name) {
+    index
+    name
+    level
+    desc
+    parent {
+      index
+      name
+      level
+      desc
+      reference
+    }
+    class {
+      index
+      name
+      hit_die
+      proficiencies {
+        index
+        name
+        classes {
+          index
+          name
+          hit_die
+        }
+        type
+        races {
+          index
+          name
+          ability_bonuses {
+            bonus
+          }
+        }
+        reference {
+          ... on EquipmentCategory {
+            index
+            name
+            equipment {
+              index
+              name
+              desc
+            }
+          }
+          ... on Skill {
+            index
+            name
+            desc
+          }
+          ... on AbilityScore {
+            index
+            name
+            full_name
+            desc
+          }
+          ... on Tool {
+            index
+            name
+            desc
+            weight
+            tool_category {
+              index
+              name
+            }
+          }
+          ... on Armor {
+            index
+            name
+            desc
+            weight
+            armor_category {
+              index
+              name
+            }
+            str_minimum
+            stealth_disadvantage
+            armor_class {
+              base
+              dex_bonus
+              max_bonus
+            }
+          }
+          ... on Weapon {
+            index
+            name
+            desc
+            weight
+            damage {
+              damage_dice
+            }
+            range {
+              normal
+              long
+            }
+            throw_range {
+              normal
+              long
+            }
+            weapon_category {
+              index
+              name
+            }
+            weapon_range
+            category_range {
+              index
+              name
+            }
+            two_handed_damage {
+              damage_dice
+            }
+            properties {
+              index
+              name
+              desc
+            }
+            special
+          }
+          ... on Vehicle {
+            index
+            name
+            desc
+            weight
+            vehicle_category {
+              index
+              name
+            }
+            speed {
+              quantity
+              unit
+            }
+            capacity
+          }
+          ... on Gear {
+            index
+            name
+            desc
+            weight
+            gear_category {
+              index
+              name
+            }
+          }
+          ... on Pack {
+            index
+            name
+            desc
+            weight
+            contents {
+              quantity
+              item {
+                index
+                name
+                desc
+                weight
+              }
+            }
+          }
+          ... on Ammunition {
+            index
+            name
+            desc
+            weight
+            quantity
+          }
+        }
+      }
+      saving_throws {
+        index
+        name
+        full_name
+        desc
+        skills {
+          index
+          name
+          desc
+          ability_score {
+            index
+            name
+            full_name
+            desc
+          }
+        }
+      }
+      spellcasting {
+        info {
+          name
+          desc
+        }
+        level
+        spellcasting_ability {
+          index
+          name
+          full_name
+          desc
+        }
+      }
+      spells {
+        index
+        area_of_effect {
+          type
+          size
+        }
+        attack_type
+        casting_time
+        components
+        concentration
+        damage {
+          damage_at_slot_level {
+            level
+            damage
+          }
+          damage_at_character_level {
+            level
+            damage
+          }
+          damage_type {
+            index
+            name
+            desc
+          }
+        }
+        dc {
+          success
+          type {
+            index
+            name
+            full_name
+            desc
+          }
+          desc
+        }
+        desc
+        duration
+        heal_at_slot_level {
+          level
+          healing
+        }
+        higher_level
+        level
+        material
+        name
+        range
+        ritual
+        school {
+          index
+          name
+          desc
+        }
+      }
+      starting_equipment {
+        quantity
+        equipment {
+          index
+          name
+          cost {
+            quantity
+            unit
+          }
+          desc
+          equipment_category {
+            index
+            name
+          }
+          weight
+        }
+      }
+      class_levels {
+        index
+        level
+        ability_score_bonuses
+        features {
+          index
+          name
+          level
+          desc
+          reference
+        }
+        prof_bonus
+        spellcasting {
+          cantrips_known
+          spell_slots_level_1
+          spell_slots_level_2
+          spell_slots_level_3
+          spell_slots_level_4
+          spell_slots_level_5
+          spell_slots_level_6
+          spell_slots_level_7
+          spell_slots_level_8
+          spell_slots_level_9
+          spells_known
+        }
+        class_specific {
+          ... on BarbarianSpecific {
+            rage_count
+            rage_damage_bonus
+            brutal_critical_dice
+          }
+          ... on BardSpecific {
+            bardic_inspiration_die
+            song_of_rest_die
+            magical_secrets_max_5
+            magical_secrets_max_7
+            magical_secrets_max_9
+          }
+          ... on ClericSpecific {
+            channel_divinity_charges
+            destroy_undead_cr
+          }
+          ... on DruidSpecific {
+            wild_shape_max_cr
+            wild_shape_swim
+            wild_shape_fly
+          }
+          ... on FighterSpecific {
+            action_surges
+            indomitable_uses
+            extra_attacks
+          }
+          ... on MonkSpecific {
+            martial_arts {
+              dice_count
+              dice_value
+            }
+            ki_points
+            unarmored_movement
+          }
+          ... on PaladinSpecific {
+            aura_range
+          }
+          ... on RangerSpecific {
+            favored_enemies
+            favored_terrain
+          }
+          ... on RogueSpecific {
+            sneak_attack {
+              dice_count
+              dice_value
+            }
+          }
+          ... on SorcererSpecific {
+            sorcery_points
+            metamagic_known
+            creating_spell_slots {
+              sorcery_point_cost
+              spell_slot_level
+            }
+          }
+          ... on WarlockSpecific {
+            invocations_known
+            mystic_arcanum_level_6
+            mystic_arcanum_level_7
+            mystic_arcanum_level_8
+            mystic_arcanum_level_9
+          }
+          ... on WizardSpecific {
+            arcane_recovery_levels
+          }
+        }
+        subclass_specific {
+          ... on DevotionSpecific {
+            aura_range
+          }
+          ... on LoreSpecific {
+            additional_magical_secrets_max_lvl
+          }
+        }
+      }
+      subclasses {
+        index
+        name
+        desc
+        subclass_flavor
+      }
+      multi_classing {
+        prerequisites {
+          minimum_score
+        }
+        prerequisite_options {
+          choose
+          type
+          from {
+            option_set_type
+            options {
+              option_type
+              minimum_score
+            }
+          }
+        }
+      }
+      proficiency_choices {
+        desc
+        choose
+        type
+        from {
+          option_set_type
+          options {
+            ... on ProficiencyChoiceOption {
+              option_type
+              choice {
+                desc
+                choose
+                type
+              }
+            }
+            ... on ProficiencyReferenceOption {
+              option_type
+              item {
+                index
+                name
+                type
+              }
+            }
+          }
+        }
+      }
+      starting_equipment_options {
+        choose
+        desc
+        type
+        from {
+          ... on EquipmentCategoryOptionSet {
+            option_set_type
+          }
+          ... on EquipmentOptionSet {
+            option_set_type
+            options {
+              ... on CountedReferenceOption {
+                option_type
+                count
+                of {
+                  
+                }
+                prerequisites {
+                  
+                }
+              }
+              ... on EquipmentCategoryChoiceOption {
+                option_type
+                choice {
+                  
+                }
+              }
+              ... on EquipmentMultipleOption {
+                option_type
+                items {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    subclass {
+      index
+      name
+      desc
+      subclass_flavor
+      subclass_levels {
+        index
+        level
+        ability_score_bonuses
+        prof_bonus
+      }
+      spells {
+        prerequisites {
+          ... on Feature {
+            index
+            name
+            level
+            desc
+            reference
+          }
+          ... on Level {
+            index
+            level
+            ability_score_bonuses
+            prof_bonus
+          }
+        }
+      }
+    }
+    prerequisites {
+      type
+      feature {
+        index
+        name
+        level
+        desc
+        reference
+      }
+      level
+      spell {
+        index
+        attack_type
+        casting_time
+        components
+        concentration
+        desc
+        duration
+        higher_level
+        level
+        material
+        name
+        range
+        ritual
+      }
+    }
+    reference
+    feature_specific {
+      expertise_options {
+        choose
+        type
+        from {
+          option_set_type
+          options {
+            ... on ExpertiseMultipleOption {
+              option_type
+              items {
+                
+              }
+            }
+          }
+        }
+      }
+      subfeature_options {
+        choose
+        type
+        from {
+          option_set_type
+          options {
+            option_type
+            item {
+              index
+              name
+              level
+              desc
+              reference
+            }
+          }
+        }
+      }
+      terrain_type_options {
+        choose
+        type
+        from {
+          option_set_type
+          options {
+            option_type
+            string
+          }
+        }
+      }
+      enemy_type_options {
+        choose
+        type
+      }
+      invocations {
+        index
+        name
+        level
+        desc
+        reference
+      }
+    }
+  }

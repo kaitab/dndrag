@@ -1,0 +1,19 @@
+  feats(order_direction, name) {
+    index
+    name
+    desc
+    prerequisites {
+      ability_score {
+        index
+        name
+        full_name
+        desc
+        skills {
+          index
+          name
+          desc
+        }
+      }
+      minimum_score
+    }
+  }

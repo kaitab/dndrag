@@ -1,0 +1,13 @@
+  equipmentCategories(order_direction, name) {
+    index
+    name
+    equipment {
+      index
+      name
+      desc
+      equipment_category {
+        index
+        name
+      }
+    }
+  }

@@ -1,0 +1,6 @@
+  alignments(order_direction, name) {
+    index
+    name
+    abbreviation
+    desc
+  }

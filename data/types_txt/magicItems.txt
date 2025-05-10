@@ -1,0 +1,21 @@
+ magicItems(
+    equipment_category: null
+    skip: null
+    limit: null
+    name: null
+  ) {
+    index
+    name
+    desc
+    rarity
+    equipment_category {
+      index
+      name
+      equipment {
+        index
+        name
+        desc
+      }
+    }
+    image
+  }

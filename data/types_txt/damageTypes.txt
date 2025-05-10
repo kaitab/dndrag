@@ -1,0 +1,5 @@
+  damageTypes(order_direction, name) {
+    index
+    name
+    desc
+  }

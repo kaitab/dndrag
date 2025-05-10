@@ -1,0 +1,256 @@
+  equipments(
+    equipment_category: null
+    order: null
+    skip: null
+    limit: null
+    name: null
+  ) {
+    index
+    name
+    cost {
+      quantity
+      unit
+    }
+    desc
+    equipment_category {
+      index
+      name
+    }
+    weight
+    ... on Tool {
+      index
+      name
+      desc
+      cost {
+        quantity
+        unit
+      }
+      equipment_category {
+        index
+        name
+        equipment {
+          index
+          name
+          desc
+        }
+      }
+      weight
+      tool_category {
+        index
+        name
+      }
+    }
+    ... on Gear {
+      index
+      name
+      cost {
+        quantity
+        unit
+      }
+      desc
+      equipment_category {
+        index
+        name
+        equipment {
+          index
+          name
+          desc
+        }
+      }
+      weight
+      gear_category {
+        index
+        name
+      }
+    }
+    ... on Pack {
+      index
+      name
+      cost {
+        quantity
+        unit
+      }
+      desc
+      equipment_category {
+        index
+        name
+        equipment {
+          index
+          name
+          desc
+        }
+      }
+      weight
+      gear_category {
+        index
+        name
+      }
+      contents {
+        quantity
+        item {
+          index
+          name
+          desc
+          weight
+        }
+      }
+    }
+    ... on Ammunition {
+      index
+      name
+      cost {
+        quantity
+        unit
+      }
+      desc
+      equipment_category {
+        index
+        name
+        equipment {
+          index
+          name
+          desc
+        }
+      }
+      weight
+      gear_category {
+        index
+        name
+      }
+      quantity
+    }
+    ... on Weapon {
+      index
+      name
+      cost {
+        quantity
+        unit
+      }
+      desc
+      equipment_category {
+        index
+        name
+        equipment {
+          index
+          name
+          desc
+        }
+      }
+      weight
+      damage {
+        damage_dice
+        damage_type {
+          index
+          name
+          desc
+        }
+      }
+      range {
+        normal
+        long
+      }
+      throw_range {
+        normal
+        long
+      }
+      weapon_category {
+        index
+        name
+      }
+      weapon_range
+      category_range {
+        index
+        name
+      }
+      two_handed_damage {
+        damage_dice
+      }
+      properties {
+        index
+        name
+        desc
+      }
+      special
+    }
+    ... on Armor {
+      index
+      name
+      cost {
+        quantity
+        unit
+      }
+      desc
+      equipment_category {
+        index
+        name
+        equipment {
+          index
+          name
+          desc
+        }
+      }
+      weight
+      armor_category {
+        index
+        name
+      }
+      str_minimum
+      stealth_disadvantage
+      armor_class {
+        base
+        dex_bonus
+        max_bonus
+      }
+    }
+    ... on Vehicle {
+      index
+      name
+      cost {
+        quantity
+        unit
+      }
+      desc
+      equipment_category {
+        index
+        name
+        equipment {
+          index
+          name
+          desc
+        }
+      }
+      weight
+      vehicle_category {
+        index
+        name
+      }
+      speed {
+        quantity
+        unit
+      }
+      capacity
+    }
+    ... on IGear {
+      index
+      name
+      cost {
+        quantity
+        unit
+      }
+      desc
+      equipment_category {
+        index
+        name
+        equipment {
+          index
+          name
+          desc
+        }
+      }
+      weight
+      gear_category {
+        index
+        name
+      }
+    }
+  }

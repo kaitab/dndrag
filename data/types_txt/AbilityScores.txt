@@ -1,0 +1,17 @@
+  abilityScores(full_name, name, order_direction) {
+    index
+    name
+    full_name
+    desc
+    skills {
+      index
+      name
+      desc
+      ability_score {
+        index
+        name
+        full_name
+        desc
+      }
+    }
+  }

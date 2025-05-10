@@ -1,0 +1,9 @@
+  languages(type, script, order, name) {
+    index
+    name
+    desc
+    script
+    type
+    typical_speakers
+  }
+}
