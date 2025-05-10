@@ -1,0 +1,12 @@
+  skills(ability_score: null, order: null, name: null) {
+    index
+    name
+    desc
+    ability_score {
+      index
+      name
+      full_name
+      desc
+      skills
+    }
+  }

@@ -1,0 +1,624 @@
+  traits(order_direction: null, name: null) {
+    index
+    desc
+    name
+    proficiencies {
+      index
+      name
+      classes {
+        index
+        name
+        hit_die
+        saving_throws {
+          index
+          name
+          full_name
+          desc
+          skills {
+            index
+            name
+            desc
+          }
+        }
+        spellcasting {
+          info {
+            name
+            desc
+          }
+          level
+          spellcasting_ability {
+            index
+            name
+            full_name
+            desc
+          }
+        }
+        spells {
+          index
+          attack_type
+          casting_time
+          components
+          concentration
+          damage {
+            damage_at_slot_level {
+              level
+              damage
+            }
+          }
+          dc {
+            success
+            desc
+          }
+          desc
+          duration
+          heal_at_slot_level {
+            level
+            healing
+          }
+          higher_level
+          level
+          material
+          name
+          range
+          ritual
+          school {
+            index
+            name
+            desc
+          }
+        }
+        starting_equipment {
+          quantity
+          equipment {
+            index
+            name
+            desc
+            weight
+          }
+        }
+        class_levels {
+          index
+          level
+          ability_score_bonuses
+          class {
+            index
+            name
+            hit_die
+          }
+          subclass {
+            index
+            name
+            desc
+            subclass_flavor
+          }
+          features {
+            index
+            name
+            level
+            desc
+            parent {
+              index
+              name
+              level
+              desc
+              reference
+            }
+            prerequisites {
+              type
+              feature {
+                index
+                name
+                level
+                desc
+                reference
+              }
+              level
+            }
+            reference
+          }
+          prof_bonus
+          spellcasting {
+            cantrips_known
+            spell_slots_level_1
+            spell_slots_level_2
+            spell_slots_level_3
+            spell_slots_level_4
+            spell_slots_level_5
+            spell_slots_level_6
+            spell_slots_level_7
+            spell_slots_level_8
+            spell_slots_level_9
+            spells_known
+          }
+          class_specific {
+            ... on BarbarianSpecific {
+              rage_count
+              rage_damage_bonus
+              brutal_critical_dice
+            }
+            ... on BardSpecific {
+              bardic_inspiration_die
+              song_of_rest_die
+              magical_secrets_max_5
+              magical_secrets_max_7
+              magical_secrets_max_9
+            }
+            ... on ClericSpecific {
+              channel_divinity_charges
+              destroy_undead_cr
+            }
+            ... on DruidSpecific {
+              wild_shape_max_cr
+              wild_shape_swim
+              wild_shape_fly
+            }
+            ... on FighterSpecific {
+              action_surges
+              indomitable_uses
+              extra_attacks
+            }
+            ... on MonkSpecific {
+              martial_arts {
+                dice_count
+                dice_value
+              }
+              ki_points
+              unarmored_movement
+            }
+            ... on PaladinSpecific {
+              aura_range
+            }
+            ... on RangerSpecific {
+              favored_enemies
+              favored_terrain
+            }
+            ... on RogueSpecific {
+              sneak_attack {
+                dice_count
+                dice_value
+              }
+            }
+            ... on SorcererSpecific {
+              sorcery_points
+              metamagic_known
+              creating_spell_slots {
+                sorcery_point_cost
+                spell_slot_level
+              }
+            }
+            ... on WarlockSpecific {
+              invocations_known
+              mystic_arcanum_level_6
+              mystic_arcanum_level_7
+              mystic_arcanum_level_8
+              mystic_arcanum_level_9
+            }
+            ... on WizardSpecific {
+              arcane_recovery_levels
+            }
+          }
+          subclass_specific {
+            ... on DevotionSpecific {
+              aura_range
+            }
+            ... on LoreSpecific {
+              additional_magical_secrets_max_lvl
+            }
+          }
+        }
+        subclasses {
+          index
+          name
+          desc
+          subclass_flavor
+          subclass_levels {
+            index
+            level
+            ability_score_bonuses
+            prof_bonus
+          }
+          spells {
+            prerequisites {
+              ... on Feature {
+                index
+                name
+                level
+                desc
+                reference
+              }
+              ... on Level {
+                index
+                level
+                ability_score_bonuses
+                prof_bonus
+              }
+            }
+            spell {
+              index
+              attack_type
+              casting_time
+              components
+              concentration
+              desc
+              duration
+              higher_level
+              level
+              material
+              name
+              range
+              ritual
+            }
+          }
+        }
+        multi_classing {
+          prerequisites {
+            minimum_score
+          }
+          prerequisite_options {
+            choose
+            type
+            from {
+              option_set_type
+              options {
+                option_type
+                minimum_score
+              }
+            }
+          }
+        }
+        starting_equipment_options {
+          choose
+          desc
+          type
+          from {
+            ... on EquipmentCategoryOptionSet {
+              option_set_type
+            }
+            ... on EquipmentOptionSet {
+              option_set_type
+              }
+            }
+          }
+        }
+      }
+      type
+      races {
+        index
+        name
+      }
+      reference {
+        ... on EquipmentCategory {
+          index
+          name
+          equipment {
+            index
+            name
+            desc
+          }
+        }
+        ... on Skill {
+          index
+          name
+          desc
+        }
+        ... on AbilityScore {
+          index
+          name
+          full_name
+          desc
+        }
+        ... on Tool {
+          index
+          name
+          desc
+          cost {
+            quantity
+            unit
+          }
+          equipment_category {
+            index
+            name
+          }
+          weight
+          tool_category {
+            index
+            name
+          }
+        }
+        ... on Armor {
+          index
+          name
+          desc
+          weight
+          armor_category {
+            index
+            name
+          }
+          str_minimum
+          stealth_disadvantage
+          armor_class {
+            base
+            dex_bonus
+            max_bonus
+          }
+        }
+        ... on Weapon {
+          index
+          name
+          desc
+          weight
+          damage {
+            damage_dice
+          }
+          range {
+            normal
+            long
+          }
+          throw_range {
+            normal
+            long
+          }
+          weapon_category {
+            index
+            name
+          }
+          weapon_range
+          category_range {
+            index
+            name
+          }
+          two_handed_damage {
+            damage_dice
+          }
+          properties {
+            index
+            name
+            desc
+          }
+          special
+        }
+        ... on Vehicle {
+          index
+          name
+          desc
+          weight
+          vehicle_category {
+            index
+            name
+          }
+          speed {
+            quantity
+            unit
+          }
+          capacity
+        }
+        ... on Gear {
+          index
+          name
+          desc
+          weight
+          gear_category {
+            index
+            name
+          }
+        }
+        ... on Pack {
+          index
+          name
+          desc
+          weight
+          contents {
+            quantity
+            item {
+              index
+              name
+              desc
+              weight
+            }
+          }
+        }
+        ... on Ammunition {
+          index
+          name
+          desc
+          weight
+          quantity
+        }
+      }
+    }
+    parent {
+      index
+      desc
+      name
+    }
+    races {
+      index
+      name
+      ability_bonuses {
+        ability_score {
+          index
+          name
+          full_name
+          desc
+        }
+        bonus
+      }
+      ability_bonus_options {
+        choose
+        type
+        from {
+          option_set_type
+          options {
+            option_type
+            bonus
+          }
+        }
+      }
+      age
+      alignment
+      language_desc
+      languages {
+        index
+        name
+        desc
+        script
+        type
+        typical_speakers
+      }
+      size
+      size_description
+      speed
+      starting_proficiencies {
+        index
+        name
+        type
+      }
+      starting_proficiency_options {
+        desc
+        choose
+        type
+      }
+      traits {
+        index
+        desc
+        name
+      }
+    }
+    subraces {
+      index
+      name
+      desc
+      race {
+        index
+        name
+        age
+        alignment
+        language_desc
+        size
+        size_description
+        speed
+      }
+      racial_traits {
+        index
+        desc
+        name
+      }
+    }
+    proficiency_choices {
+      desc
+      choose
+      type
+      from {
+        option_set_type
+        options {
+          ... on ProficiencyChoiceOption {
+            option_type
+            choice {
+              desc
+              choose
+              type
+            }
+          }
+          ... on ProficiencyReferenceOption {
+            option_type
+            item {
+              index
+              name
+              type
+            }
+          }
+        }
+      }
+    }
+    language_options {
+      choose
+      type
+      from {
+        option_set_type
+        options {
+          option_type
+          item {
+            index
+            name
+            desc
+            script
+            type
+            typical_speakers
+          }
+        }
+      }
+    }
+    trait_specific {
+      breath_weapon {
+        name
+        desc
+        dc {
+          type {
+            index
+            name
+            full_name
+            desc
+          }
+          success
+        }
+        usage {
+          times
+          type
+        }
+        damage {
+          damage_at_character_level {
+            level
+            damage
+          }
+        }
+        area_of_effect {
+          type
+          size
+        }
+      }
+      damage_type {
+        index
+        name
+        desc
+      }
+      spell_options {
+        choose
+        type
+        from {
+          option_set_type
+          options {
+            option_type
+            item {
+              index
+              attack_type
+              casting_time
+              components
+              concentration
+              desc
+              duration
+              higher_level
+              level
+              material
+              name
+              range
+              ritual
+            }
+          }
+        }
+      }
+      subtrait_options {
+        choose
+        type
+        from {
+          option_set_type
+          options {
+            option_type
+            item {
+              index
+              desc
+              name
+            }
+          }
+        }
+      }
+    }

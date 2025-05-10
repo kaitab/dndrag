@@ -35,7 +35,7 @@ def make_retriever_txt(db):
 
     # retriever_tool gets the relevant entities for the query
 
-    retriever = vector_store.as_retriever(search_kwargs={"k": 5})
+    retriever = vector_store.as_retriever(search_kwargs={"k": 3})
     description = (
         "Look up schema to use when crafting a valid GraphQL query. "
         "Input is the suspected object types from a user query, ouput is the GraphQL schema for those object types."

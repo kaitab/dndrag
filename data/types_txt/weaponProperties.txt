@@ -1,0 +1,5 @@
+  weaponProperties(order_direction: null, name: null) {
+    index
+    name
+    desc
+  }
