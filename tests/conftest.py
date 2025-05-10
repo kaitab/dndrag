@@ -2,20 +2,30 @@ import pytest
 from app import create_app, db
 
 @pytest.fixture(scope='session')
-def app():
+def app_and_rag_context():
     """Session-wide test application."""
-    # Create the app instance
+    
     app, rag = create_app(testing=True)
-    # Establish an application context before running the tests.
-    # This is needed for operations like db.create_all()
+
     context = app.app_context()
     context.push()
 
     # Yield the app instance to the tests
-    yield app
+    yield app, rag
 
     # Clean up the context after the tests are done
     context.pop()
+
+@pytest.fixture(scope='session')
+def app(app_and_rag_context):
+    """Fixture to provide the app instance."""
+    return app_and_rag_context[0]
+
+@pytest.fixture(scope='session')
+def rag(app_and_rag_context):
+    """Fixture to provide the rag instance."""
+    return app_and_rag_context[1] 
+
 
 @pytest.fixture(scope='function')
 def client(app):

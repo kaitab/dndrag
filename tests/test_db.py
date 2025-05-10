@@ -1,5 +1,4 @@
 import pytest
-# from dnd_rag import db, rag
 from app.model import Query
 from dnd_rag.query_history import log_query, all_queries, clear_query_history
 
