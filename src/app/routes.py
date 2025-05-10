@@ -1,8 +1,10 @@
-from app import app, rag
-from flask import request, render_template
+from . import rag
+from flask import request, render_template, Blueprint
 from dnd_rag.query_history import log_query, all_queries
 
-@app.route("/", methods=["GET", "POST"])
+main_bp = Blueprint('main', __name__)
+
+@main_bp.route("/", methods=["GET", "POST"])
 def main_page():
     """generates the main page"""
     if request.method == "GET":

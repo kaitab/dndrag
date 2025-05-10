@@ -22,7 +22,6 @@ def test_log_query_direct(session):
     # check 2nd item is added
 
     logged_queries = session.query(Query).all()
-    print("first ones good")
     updated_list = all_queries()
     assert len(logged_queries) == 2
     assert len(logged_queries) == len(updated_list)
@@ -33,7 +32,6 @@ def test_log_query_direct(session):
 def test_log_query_via_post(client, session):
     """Tests that db is updated when a POST request is made"""
 
-    print("in test")
     
     form_data = {
         "user_query": "What is the alignment of a Beholder?",
